@@ -4,6 +4,7 @@ plugins {
   id 'application'
   id 'eclipse'
   id 'idea'
+  id 'org.graalvm.buildtools.native' version "0.9.7.1"
 }
 
 mainClassName = 'com.exercism.runner.TestRunner'
@@ -26,4 +27,11 @@ dependencies {
 
 tasks.named("shadowJar") {
   archiveFileName.set("autotest-runner.jar")
+}
+
+nativeBuild {
+  imageName = "autotest-runner"
+  mainClass = "com.exercism.runner.TestRunner"
+  verbose = true
+  fallback = false
 }

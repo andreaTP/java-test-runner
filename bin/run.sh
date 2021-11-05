@@ -22,5 +22,5 @@ cp -R $input_folder/* .
 
 find . -mindepth 1 -type f | grep 'Test.java' | xargs -I file sed -i "s/@Ignore(.*)//g;s/@Ignore//g;" file
 
-java -jar /opt/test-runner/autotest-runner.jar $problem_slug
+/opt/test-runner/autotest-runner $problem_slug
 mv results.json $output_folder
