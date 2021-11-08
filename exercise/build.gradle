@@ -13,6 +13,7 @@ repositories {
 dependencies {
   testImplementation "junit:junit:4.13"
   testImplementation "org.assertj:assertj-core:3.15.0"
+
 }
 
 test {
@@ -21,4 +22,12 @@ test {
     showStandardStreams = true
     events = ["passed", "failed", "skipped"]
   }
+}
+
+apply plugin: 'com.exercism.plugin'
+
+buildscript {
+    dependencies {
+      classpath files('/home/builder/autotest-runner.jar')
+    }
 }

@@ -22,7 +22,6 @@ cp -R $input_folder/* .
 
 find . -mindepth 1 -type f | grep 'Test.java' | xargs -I file sed -i "s/@Ignore(.*)//g;s/@Ignore//g;" file
 
-echo -e "test {\n  maxHeapSize = '2G'\n  reports.html.required = false\n}" >> build.gradle
-timeout 20 gradle test --offline --no-daemon --warning-mode=none --no-watch-fs --console=plain 2> gradle-test.err
-java -jar /opt/test-runner/autotest-runner.jar $?
+echo "test {\n  maxHeapSize = '2G'\n  reports.html.required = false\n}\napply plugin: 'com.exercism.plugin'\nbuildscript {\n  dependencies  {\n    classpath files('/opt/test-runner/autotest-runner.jar')\n  }\n}" >> build.gradle
+timeout 20 gradle test exercism --offline --no-daemon --warning-mode=none --no-watch-fs --console=plain 2> gradle-test.err
 mv results.json $output_folder
